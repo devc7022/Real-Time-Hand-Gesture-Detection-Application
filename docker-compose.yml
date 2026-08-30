@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  hand-gesture-detector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hand_gesture_detector_app
+    ports:
+      - "8501:8501"
+    environment:
+      - WEBHOOK_TIMEOUT=5
+      - WEBHOOK_COOLDOWN_SECONDS=2.0
+      - LOG_LEVEL=INFO
+    # On Linux hosts, enable host webcam device access:
+    # devices:
+    #   - "/dev/video0:/dev/video0"
+    restart: unless-stopped
